@@ -1,0 +1,6 @@
+Debug/test_led.log
+*.tlog
+Debug/vc120.idb
+*.pdb
+*.suo
+test_led.sdf

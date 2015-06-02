@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_led", "test_led.vcxproj", "{69E1B255-4DE5-4812-A6D3-384C54F0F381}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69E1B255-4DE5-4812-A6D3-384C54F0F381}.Debug|Win32.ActiveCfg = Debug|Win32
+		{69E1B255-4DE5-4812-A6D3-384C54F0F381}.Debug|Win32.Build.0 = Debug|Win32
+		{69E1B255-4DE5-4812-A6D3-384C54F0F381}.Release|Win32.ActiveCfg = Release|Win32
+		{69E1B255-4DE5-4812-A6D3-384C54F0F381}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
