@@ -74,81 +74,57 @@ static void initTimer()
 	NVIC_EnableIRQ(TIM6_DAC_IRQn); //Разрешение TIM6_DAC_IRQn прерывания
 }
 
-int pressure_to_delay_data[] = {
-	// num of rows	// power
-	2, 				5,		10, 			// 1st row is power
-
-	//	pressure, delay for power
-    0, 				0,		0,
-    100, 			1000,	2000,
-    200, 			500,	700
-};
-
-int get_delay()
+void test_lcd()
 {
-    int pressure = 150;
-    int power = 7;
+	MT_Init();
+	    MT_Delay(1000);
 
-    int power_cols =  pressure_to_delay_data[0];
-    int total_cols = power_cols + 1;
+	    MT_FunctionSet8bit();
+	    MT_Delay(1000);
 
-    int n_pressure = sizeof(pressure_to_delay_data) / (total_cols * sizeof(*pressure_to_delay_data)) - 1; // skip 1st power row
-    if (n_pressure < 2)
-        return 0;
+	    MT_FunctionSet4bit(1, 1);
+	    MT_Delay(1000);
 
-    int power_col1 = 1, power_col2 = 2;
+	    MT_FunctionSet4bit(1, 1);
+	    MT_Delay(1000);
 
-    int i = 1;
-    for(; i < power_cols; i++)
-    {
-    	int pow = pressure_to_delay_data[i];
-    	if(power > pow)
-    		continue;
+	    MT_DisplayOnOff();
+	    MT_Delay(1000);
 
-    	power_col1 = i - 1;
-    	power_col2 = i;
-    	break;
-    }
+	    MT_DisplayClear();
+	    MT_Delay(10000);
 
-    if (pressure <= pressure_to_delay_data[0])
-        return pressure_to_delay_data[1];
+	    MT_WriteData(0x32);
+	    MT_Delay(1000);
+	    MT_WriteData(0x20);
+	    MT_Delay(1000);
+	    MT_WriteData(0x62);
+	    MT_Delay(1000);
+	    MT_WriteData(0x69);
+	    MT_Delay(1000);
+	    MT_WriteData(0x74);
+	    MT_Delay(1000);
+	    MT_WriteData(0x20);
+	    MT_Delay(1000);
+	    MT_WriteData(0x6D);
+	    MT_Delay(1000);
+	    MT_WriteData(0x6F);
+	    MT_Delay(1000);
+	    MT_WriteData(0x64);
+	    MT_Delay(1000);
+	    MT_WriteData(0x65);
+	    MT_Delay(1000);
 
-    int * pressure_to_delay_data_it = pressure_to_delay_data + total_cols;
-    int p1 = pressure_to_delay_data[total_cols], p2 = pressure_to_delay_data[total_cols + 1];
-
-    i = 1;
-    for (; i < n_pressure; i++, pressure_to_delay_data_it+=total_cols)
-    {
-
-        p2 = pressure_to_delay_data_it[0];
-        if (pressure > p2)
-            continue;
-
-        p1 = pressure_to_delay_data[(i - total_cols) + 0];
-        if (p2 == p1)
-            continue;
-    }
-
-    int v11 = pressure_to_delay_data_it[power_col1];
-    int v21 = pressure_to_delay_data_it[power_col1];
-
-    int v12 = pressure_to_delay_data_it[power_col2];
-    int v22 = pressure_to_delay_data_it[power_col2];
-
-    int v1 = v11 + (v21 - v11) * (pressure - p1) / (p2 - p1);
-    int v2 = v12 + (v22 - v12) * (pressure - p1) / (p2 - p1);
-
-    int pow1 = pressure_to_delay_data[power_col1];
-    int pow2 = pressure_to_delay_data[power_col2];
-    return v1 + (v2 - v1) * (power - pow1) / (pow2 - pow1);
-}
-
-void init_adc()
-{
+	    while(1)
+	    {
+	        __NOP();
+	    }
 }
 
 int main(void)
 {
+	test_lcd();
+	/*
 	GPIO_setup();
 	button_setup();
 	GPIO_ResetBits(GPIOD, GPIO_Pin_12 | GPIO_Pin_13 |GPIO_Pin_14 |GPIO_Pin_15 );
@@ -161,72 +137,6 @@ int main(void)
 	{
 
 	}
+	*/
 }
 
-#if 0
-#include <stm32f4xx_gpio.h>
-#include <stm32f4xx_rcc.h>
-
-GPIO_InitTypeDef  GPIO_InitStructure;
-
-void Delay(__IO uint32_t nCount);
-
-int main(void)
-{
-
-	SystemInit();
-
-	/* GPIOD Periph clock enable */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-
-	/* Configure PD12, PD13, PD14 and PD15 in output pushpull mode */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13| GPIO_Pin_14| GPIO_Pin_15;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);
-
-    while(1)
-    {
-
-    	 /* PD12 to be toggled */
-    	    GPIO_SetBits(GPIOD, GPIO_Pin_12);
-
-    	    /* Insert delay */
-    	    Delay(0x3FFFFF);
-
-    	    /* PD13 to be toggled */
-    	    GPIO_SetBits(GPIOD, GPIO_Pin_13);
-
-    	    /* Insert delay */
-    	    Delay(0x3FFFFF);
-
-    	    /* PD14 to be toggled */
-    	    GPIO_SetBits(GPIOD, GPIO_Pin_14);
-
-    	    /* Insert delay */
-    	    Delay(0x3FFFFF);
-
-    	    /* PD15 to be toggled */
-    	    GPIO_SetBits(GPIOD, GPIO_Pin_15);
-
-    	    /* Insert delay */
-    	    Delay(0x7FFFFF);
-
-    	    GPIO_ResetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-
-    	    /* Insert delay */
-    	    Delay(0xFFFFFF);
-    	  }
-
-
-}
-
-void Delay(__IO uint32_t nCount)
-{
-  while(nCount--)
-  {
-  }
-}
-#endif
