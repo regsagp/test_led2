@@ -7,3 +7,7 @@ Debug/vc120.idb
 *.pdb
 *.suo
 test_led.sdf
+*.log
+test_led/Debug/bin/history.xml
+*.bin
+*.o
