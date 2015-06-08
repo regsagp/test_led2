@@ -115,10 +115,6 @@ void test_lcd()
 	    MT_WriteData(0x65);
 	    MT_Delay(1000);
 
-	    while(1)
-	    {
-	        __NOP();
-	    }
 }
 
 #include "defines.h"
@@ -173,16 +169,58 @@ int main2(void) {
 
 	/* Show custom character at x = 1, y = 2 from RAM location 0 */
 	TM_HD44780_PutCustom(1, 2, 0);
-
-	while (1) {
-
-	}
 }
 
+#include "tm_stm32f4_delay.h"
+#include "tm_stm32f4_adc.h"
+//#include "tm_stm32f4_usart.h"
+#include <stdio.h>
+void test_adc()
+{
+	 char str[150];
+	/* Initialize Delay library */
+	    TM_DELAY_Init();
+
+	    /* Initialize USART1, 115200 baud, TX: PB6 */
+	    //TM_USART_Init(USART1, TM_USART_PinsPack_2, 115200);
+
+
+	    /* Initialize ADC1 on channel 0, this is pin PA0 */
+	    //TM_ADC_Init(ADC1, ADC_Channel_0);
+
+	    /* Initialize ADC1 on channel 3, this is pin PA3 */
+	    //TM_ADC_Init(ADC1, ADC_Channel_3);
+
+	    /* Initialize ADC1 */
+	    TM_ADC_InitADC(ADC1);
+
+	    /* Enable vbat channel */
+	    TM_ADC_EnableVbat();
+
+
+	    while (1) {
+	        /* Read & format data */
+	        sprintf(str, "----------------------------\nVbat voltage: %d mV\n", TM_ADC_ReadVbat(ADC1));
+
+	        printf("----------------------------\nVbat voltage: %d mV\n", TM_ADC_ReadVbat(ADC1));
+
+	        /* Put to USART */
+	        //TM_USART_Puts(USART1, str);
+
+	        /* Little delay */
+	        Delayms(1000);
+	    }
+}
 
 int main(void)
 {
-	main2();
+	//test_lcd();
+	//main2();
+	test_adc();
+
+
+
+
 	/*
 	GPIO_setup();
 	button_setup();
@@ -197,6 +235,10 @@ int main(void)
 
 	}
 	*/
+	while(1)
+	{
+
+	}
 	return 0;
 }
 
