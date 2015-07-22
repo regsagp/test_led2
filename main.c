@@ -1,35 +1,33 @@
+#include <tchar.h>
+#include "ports.h"
+
 void lcd_print(const char* msg, int row) {}
-void lcd_print(const char* msg) {
-    lcd_print(msg, 0);
-}
+//void lcd_print(const char* msg) {
+//    lcd_print(msg, 0);
+//}
 
 void lcd_print_timeout(const char* msg, int ms) {
     lcd_print(msg, 0);
 }
 
-
-void init_hw()
-{}
-
-bool check1()
+int check1()
 {
-    int pb6 = 0, pb7 = 0;
-    pb6 = 0;
-    if (pb7 != 0)
+    reset_port(PortB, 6);
+    if (get_port(PortB, 7) != 0)
     {
-        pb6 = 1;
-        lcd_print("bla");
-        return false;
+        set_port(PortB, 6);
+        lcd_print("bla", 0);
+        return 0;
     }
     else
-        pb6 = 1;
+        set_port(PortB, 6);
 
-    return true;
+    return 1;
 }
 
-bool usb_connected()
+int usb_connected()
 {
-    return false;
+    return 0;
 }
 
 int shot()
@@ -78,32 +76,19 @@ void print_current_state()
 {
     char str[64];
     sprintf(str, "cyl:%d", get_cylinder());
-    lcd_print(str);
+    lcd_print(str, 0);
 }
 
 int is_shot()
 {
-    return 0;
+    return get_port(PortA, 5) == 0;
 }
-
-void set_pa(int id)
-{
-}
-void reset_pa(int id)
-{
-}
-
-int get_pa(int id)
-{
-    return 0;
-}
-
 
 void sleep()
 {
 }
 
-bool make_shot()
+int make_shot()
 {
     set_pa(5);
 
@@ -112,20 +97,17 @@ bool make_shot()
 
     int cyl = get_cylinder();
     if (cyl > 0)
-    {
         set_cylinder(cyl - 1);
-    }
 
-    reset_pa(1);
-    if (get_pa(2))
+    reset_port(PortA, 1);
+    if (get_port(PortA, 2))
     {
-        set_pa(1);
-        lcd_print("bla2");
+        set_port(PortA, 1);
+        lcd_print("bla2", 0);
         sleep();
-        return false;
+        return 0;
     }
-    set_pa(1);
-
+    set_port(PortA, 1);
 }
 
 
@@ -146,10 +128,11 @@ int _tmain(int argc, _TCHAR* argv[])
     }
 
     int i = 0;
-    while (true) {
+    while (1) 
+    {
         if (!shot())
         {
-            lcd_print("shot error");
+            lcd_print("shot error", 0);
             power_off();
             return 0;
         }
@@ -157,7 +140,7 @@ int _tmain(int argc, _TCHAR* argv[])
         int press = get_pressure();
         if (press >= 0 && press < MIN_PRESSURE)
         {
-            lcd_print("pressure is low");
+            lcd_print("pressure is low", 0);
             delay(500);
             continue;
         }
@@ -166,6 +149,7 @@ int _tmain(int argc, _TCHAR* argv[])
         if (cylinder == 1)
             continue;
 
+        // концевик 
         int fuse = get_fuse();
         if (fuse == 1)
             continue;
