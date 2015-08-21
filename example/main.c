@@ -212,11 +212,14 @@ void test_adc()
 	    }
 }
 
+int test_usb(void);
 int main(void)
 {
 	//test_lcd();
 	//main2();
 	test_adc();
+
+	test_usb();
 
 
 

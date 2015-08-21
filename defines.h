@@ -97,6 +97,7 @@
 // Set DB4 pin
 #define MT_WH1602_DB4_PIN		(GPIO_Pin_12)
 
+#define FATFS_USE_USB 1
 
 #endif
 
