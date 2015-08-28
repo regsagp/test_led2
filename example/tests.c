@@ -11,15 +11,6 @@
 #include <stm32f4xx_gpio.h>
 #include <stm32f4xx_rcc.h>
 
-
-void init_hw()
-{
-}
-
-#if 0000000000000
-
-
-
 //#include <stm32f4xx.h>
 //#include <stm32f4xx_gpio.h>
 //#include <stm32f4xx_rcc.h>
@@ -178,6 +169,8 @@ int main2(void) {
 
 	/* Show custom character at x = 1, y = 2 from RAM location 0 */
 	TM_HD44780_PutCustom(1, 2, 0);
+
+	return 0;
 }
 
 #include "tm_stm32f4_delay.h"
@@ -222,7 +215,20 @@ void test_adc()
 }
 
 int test_usb(void);
-int main(void)
+#include "ports.h"
+void set_port(PortType port, int id)
+{
+}
+void reset_port(PortType port, int id)
+{
+	//GPIO_ResetBits(GPIOD, GPIO_Pin_12 | GPIO_Pin_13 |GPIO_Pin_14 |GPIO_Pin_15 );
+}
+int get_port(PortType port, int id)
+{
+	return 0;
+}
+
+int main3(void)
 {
 	//test_lcd();
 	//main2();
@@ -249,4 +255,3 @@ int main(void)
 	return 0;
 }
 
-#endif

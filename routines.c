@@ -1,9 +1,25 @@
-#include <tchar.h>
+//#include <tchar.h>
 #include "ports.h"
 //#include <printf.h>
 
-#define SHOT_IN PortA, 5
-#define SHOT_OUT PortC, 5
+#define SWITCH_1 		PortA, Pin3
+#define SWITCH_2 		PortA, Pin4
+#define SHOT_IN 		PortA, Pin5
+#define DOSYLATEL_LED_OUT PortA, Pin7
+
+
+#define DOSYLATEL_IN 	PortB, Pin1
+
+#define DC_IN 			PortC, Pin0
+#define BUTTON_DEL      PortC, Pin1
+#define BUTTON_ENTER    PortC, Pin2
+#define HIGH_VOLT_IN 	PortC, Pin3
+#define PRESSURE_IN 	PortC, Pin4
+#define SHOT_OUT 		PortC, Pin5
+#define BUTTON_LEFT     PortC, Pin13
+#define BUTTON_RIGHT    PortC, Pin14
+
+
 
 void lcd_print(const char* msg, int row) {}
 //void lcd_print(const char* msg) {
@@ -16,15 +32,15 @@ void lcd_print_timeout(const char* msg, int ms) {
 
 int check1()
 {
-    reset_port(PortB, 6);
-    if (get_port(PortB, 7) != 0)
+    reset_port(PortB, Pin6);
+    if (get_port(PortB, Pin7) != 0)
     {
-        set_port(PortB, 6);
+        set_port(PortB, Pin6);
         lcd_print("bla", 0);
         return 0;
     }
     else
-        set_port(PortB, 6);
+        set_port(PortB, Pin6);
 
     return 1;
 }
@@ -103,11 +119,11 @@ int make_shot()
     if (cyl > 0)
         set_cylinder(cyl - 1);
 
-    reset_port(PortA, 1);
-    if (get_port(PortA, 2))
+    reset_port(PortA, Pin1);
+    if (get_port(PortA, Pin2))
     {
-        set_port(PortA, 1);
-        lcd_print("bla2", 0);
+        set_port(PortA, Pin1);
+        lcd_print("bla2", Pin0);
         sleep();
         return 0;
     }
@@ -115,20 +131,6 @@ int make_shot()
 
     return 1;
 }
-
-#define SWITCH_1 PortA, 3
-#define SWITCH_2 PortA, 4
-#define DOSYLATEL_IN PortB, 1
-#define DOSYLATEL_LED_OUT PortA, 7
-
-#define BUTTON_LEFT     PortC, 13
-#define BUTTON_RIGHT    PortC, 14
-#define BUTTON_DEL      PortC, 1
-#define BUTTON_ENTER    PortC, 2
-
-#define PRESSURE_IN PortC, 4
-#define HIGH_VOLT_IN PortC, 3
-#define DC_IN PortC, 0
 
 
 static void start_init()
@@ -150,8 +152,11 @@ static void start_init()
 #include <conio.h>
 #endif
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
+	//main2();
+
+#if 1
     init_hw();
     start_init();
 
@@ -218,6 +223,7 @@ int _tmain(int argc, _TCHAR* argv[])
         printf("%d : %c\n", i++, c);
 #endif
     }
+#endif
 
     return 0;
 }
