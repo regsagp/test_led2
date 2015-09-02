@@ -150,7 +150,7 @@ int main2(void) {
 	TM_HD44780_Puts(0, 2, "stm32f4-\n\r       discovery.com");
 
 	/* Wait a little */
-	Delayms(3000);
+	Delayms(5000);
 
 	/* Clear LCD */
 	TM_HD44780_Clear();

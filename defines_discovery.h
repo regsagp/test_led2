@@ -31,26 +31,18 @@
 /* Put your global defines for all libraries here used in your project */
 
 /* If you want to change your pinout
- / then uncomment pin you want to change
- / and edit its settings */
+/ then uncomment pin you want to change
+/ and edit its settings */
 
-
-// ===================== LCD =======================
 /* Control pins */
 /* RS - Register select pin */
 #define TM_HD44780_RS_RCC				RCC_AHB1Periph_GPIOB
-#define TM_HD44780_RS_PORT				GPIOB
+#define TM_HD44780_RS_PORT			GPIOB
+#define TM_HD44780_RS_PIN				GPIO_Pin_0
 /* E - Enable pin */
 #define TM_HD44780_E_RCC				RCC_AHB1Periph_GPIOB
 #define TM_HD44780_E_PORT				GPIOB
-
-#ifdef DISCOVERY
-#define TM_HD44780_RS_PIN				GPIO_Pin_0
 #define TM_HD44780_E_PIN				GPIO_Pin_2
-#else
-#define TM_HD44780_RS_PIN				GPIO_Pin_2
-#define TM_HD44780_E_PIN				GPIO_Pin_11
-#endif
 
 /* D4 - Data 4 pin */
 #define TM_HD44780_D4_RCC				RCC_AHB1Periph_GPIOC
@@ -69,7 +61,41 @@
 #define TM_HD44780_D7_PORT				GPIOB
 #define TM_HD44780_D7_PIN				GPIO_Pin_15
 
-// ===================== end of LCD =======================
+
+// Set RS port
+#define MT_WH1602_RS_PORT       (GPIOB)
+// Set RS pin
+#define MT_WH1602_RS_PIN		(GPIO_Pin_0)
+
+// Set RW port
+#define MT_WH1602_RW_PORT		(GPIOB)
+// Set RW pin
+#define MT_WH1602_RW_PIN		(GPIO_Pin_1)
+
+// Set E port
+#define MT_WH1602_E_PORT		(GPIOB)
+// Set E pin
+#define MT_WH1602_E_PIN	  		(GPIO_Pin_2)
+
+// Set DB7 port
+#define MT_WH1602_DB7_PORT		(GPIOB)
+// Set DB7 pin
+#define MT_WH1602_DB7_PIN		(GPIO_Pin_15)
+
+// Set DB6 port
+#define MT_WH1602_DB6_PORT		(GPIOB)
+// Set DB6 pin
+#define MT_WH1602_DB6_PIN       (GPIO_Pin_14)
+
+// Set DB5 port
+#define MT_WH1602_DB5_PORT		(GPIOB)
+// Set DB5 pin
+#define MT_WH1602_DB5_PIN	    (GPIO_Pin_13)
+
+// Set DB4 port
+#define MT_WH1602_DB4_PORT		(GPIOB)
+// Set DB4 pin
+#define MT_WH1602_DB4_PIN		(GPIO_Pin_12)
 
 
 #define PortA (GPIOA)

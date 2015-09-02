@@ -154,9 +154,9 @@ static void start_init()
 
 int main()
 {
-	//main2();
+	main2();
 
-#if 1
+#if 0
     init_hw();
     start_init();
 

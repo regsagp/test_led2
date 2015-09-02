@@ -109,13 +109,13 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_led/libs/tm_stm32f4_usb_msc_host.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1452" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="routines.c" partName="routines.c" path="C:/Users/a.pervov/Documents/GitHub/test_led2/routines.c" title="routines.c" tooltip="C:/Users/a.pervov/Documents/GitHub/test_led2/routines.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="routines.c" partName="routines.c" path="C:/Users/a.pervov/Documents/GitHub/test_led2/routines.c" title="routines.c" tooltip="C:/Users/a.pervov/Documents/GitHub/test_led2/routines.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_led/example/routines.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2510" selectionTopPixel="2813"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2394" selectionTopPixel="2413"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tests.c" partName="tests.c" path="C:/Users/a.pervov/Documents/GitHub/test_led2/example/tests.c" title="tests.c" tooltip="C:/Users/a.pervov/Documents/GitHub/test_led2/example/tests.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="tests.c" partName="tests.c" path="C:/Users/a.pervov/Documents/GitHub/test_led2/example/tests.c" title="tests.c" tooltip="C:/Users/a.pervov/Documents/GitHub/test_led2/example/tests.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_led/example/tests.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6651" selectionTopPixel="4200"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4855" selectionTopPixel="2580"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.c" partName="stm32f4xx_gpio.c" path="C:/Users/a.pervov/Documents/GitHub/test_led2/cmsis_lib/source/stm32f4xx_gpio.c" title="stm32f4xx_gpio.c" tooltip="C:/Users/a.pervov/Documents/GitHub/test_led2/cmsis_lib/source/stm32f4xx_gpio.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/test_led/cmsis_lib/source/stm32f4xx_gpio.c"/>
@@ -348,35 +348,22 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/libs/defines.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/example/routines.c"/>
 <editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="C:\Users\a.pervov\Documents\GitHub\test_led2\ports.h" project="test_led"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/cmsis_lib/include/stm32f4xx_gpio.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/example/tests.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/cmsis_boot/startup/startup_stm32f4xx.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/cmsis_boot/stm32f4xx.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/cmsis_lib/source/stm32f4xx_gpio.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/example/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/test_led/example/tests.c"/>
 </editors>
-<item historyLabel="stm32f4xx_gpio.h" index="3">
-<position info="not_deleted" x="5709" y="10"/>
-</item>
-<item historyLabel="defines.h" index="0">
-<position info="not_deleted" x="3321" y="0"/>
-</item>
-<item historyLabel="tests.c" index="4">
-<position info="not_deleted" x="6328" y="0"/>
-</item>
-<item historyLabel="startup_stm32f4xx.c" index="5">
-<position info="not_deleted" x="14795" y="0"/>
-</item>
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="291" y="0"/>
 </item>
-<item historyLabel="stm32f4xx.h" index="6">
+<item historyLabel="stm32f4xx.h" index="4">
 <position/>
 </item>
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="291" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="493" y="0"/>
 </item>
 <item historyLabel="defines.h" index="0">
@@ -391,13 +378,13 @@
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="375" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="493" y="0"/>
 </item>
 <item historyLabel="defines.h" index="0">
 <position info="not_deleted" x="3090" y="0"/>
 </item>
-<item historyLabel="stm32f4xx.h" index="6">
+<item historyLabel="stm32f4xx.h" index="4">
 <position info="not_deleted" x="70244" y="0"/>
 </item>
 <item historyLabel="defines.h" index="0">
@@ -406,19 +393,19 @@
 <item historyLabel="routines.c" index="1">
 <position info="not_deleted" x="741" y="30"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6326" y="0"/>
 </item>
-<item historyLabel="stm32f4xx.h" index="6">
+<item historyLabel="stm32f4xx.h" index="4">
 <position info="not_deleted" x="69677" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6326" y="0"/>
 </item>
-<item historyLabel="stm32f4xx_gpio.c" index="7">
+<item historyLabel="stm32f4xx_gpio.c" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="stm32f4xx_gpio.c" index="7">
+<item historyLabel="stm32f4xx_gpio.c" index="5">
 <position info="not_deleted" x="14750" y="12"/>
 </item>
 <item historyLabel="routines.c" index="1">
@@ -427,13 +414,13 @@
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="375" y="0"/>
 </item>
-<item historyLabel="stm32f4xx.h" index="6">
+<item historyLabel="stm32f4xx.h" index="4">
 <position info="not_deleted" x="69677" y="0"/>
 </item>
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="411" y="0"/>
 </item>
-<item historyLabel="stm32f4xx.h" index="6">
+<item historyLabel="stm32f4xx.h" index="4">
 <position info="not_deleted" x="70099" y="14"/>
 </item>
 <item historyLabel="ports.h" index="2">
@@ -448,62 +435,74 @@
 <item historyLabel="defines.h" index="0">
 <position info="not_deleted" x="3155" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6305" y="3"/>
 </item>
 <item historyLabel="ports.h" index="2">
 <position info="not_deleted" x="402" y="8"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6305" y="3"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6413" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6221" y="38"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6218" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6305" y="3"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6311" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6305" y="3"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6303" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6429" y="15"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6427" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="5132" y="3"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="5130" y="0"/>
 </item>
-<item historyLabel="tests.c" index="4">
+<item historyLabel="tests.c" index="3">
 <position info="not_deleted" x="6392" y="37"/>
 </item>
-<item historyLabel="main.c" index="8">
+<item historyLabel="main.c" index="6">
 <position info="not_deleted" x="6533" y="0"/>
 </item>
-<item historyLabel="main.c" index="8">
+<item historyLabel="main.c" index="6">
 <position info="not_deleted" x="459" y="0"/>
 </item>
 <item historyLabel="routines.c" index="1">
 <position info="not_deleted" x="1909" y="0"/>
 </item>
-<item active="true" historyLabel="routines.c" index="1">
+<item historyLabel="routines.c" index="1">
 <position info="not_deleted" x="2383" y="0"/>
+</item>
+<item historyLabel="tests.c" index="7">
+<position info="not_deleted" x="6651" y="0"/>
+</item>
+<item historyLabel="tests.c" index="7">
+<position info="not_deleted" x="3975" y="5"/>
+</item>
+<item historyLabel="routines.c" index="1">
+<position info="not_deleted" x="2394" y="0"/>
+</item>
+<item active="true" historyLabel="tests.c" index="7">
+<position info="not_deleted" x="3975" y="5"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

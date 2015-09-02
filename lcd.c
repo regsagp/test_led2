@@ -1,4 +1,5 @@
 // http://microtechnics.ru/rabota-s-displeem-na-baze-hd44780/
+#if 00000
 #include "lcd.h"
 
 //**************************************************************************************************
@@ -257,3 +258,4 @@ void MT_WriteData(uint8_t data)
 }
 
 
+#endif
