@@ -12,3 +12,8 @@ test_led/Debug/bin/history.xml
 *.bin
 *.o
 error.txt
+test_led/Debug/bin/test_led.elf
+*.elf
+test_led/Debug/bin/test_led.elf
+test_led/Debug/obj/dependencies.xml
+test_led/Debug/obj/history.xml

@@ -152,9 +152,12 @@ static void start_init()
 #include <conio.h>
 #endif
 
+void test_buttons();
+
 int main()
 {
-	main2();
+	test_lcd();
+	test_buttons();
 
 #if 0
     init_hw();
