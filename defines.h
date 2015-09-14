@@ -35,6 +35,8 @@
  / and edit its settings */
 
 
+#define DISCOVERY
+
 // ===================== LCD =======================
 /* Control pins */
 /* RS - Register select pin */
@@ -53,11 +55,11 @@
 #endif
 
 /* D4 - Data 4 pin */
-#define TM_HD44780_D4_RCC				RCC_AHB1Periph_GPIOC
+#define TM_HD44780_D4_RCC				RCC_AHB1Periph_GPIOB
 #define TM_HD44780_D4_PORT				GPIOB
 #define TM_HD44780_D4_PIN				GPIO_Pin_12
 /* D5 - Data 5 pin */
-#define TM_HD44780_D5_RCC				RCC_AHB1Periph_GPIOC
+#define TM_HD44780_D5_RCC				RCC_AHB1Periph_GPIOB
 #define TM_HD44780_D5_PORT				GPIOB
 #define TM_HD44780_D5_PIN				GPIO_Pin_13
 /* D6 - Data 6 pin */

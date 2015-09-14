@@ -61,8 +61,8 @@ int get_pressure()
     return -1;
 }
 
-void delay(int ms)
-{}
+void delay(int ms);
+//{}
 
 int get_cylinder()
 {
@@ -152,12 +152,18 @@ static void start_init()
 #include <conio.h>
 #endif
 
+void init_hw()
+{
+}
+
+
 int main()
 {
-	main2();
+    init_hw();
+
+	main3();
 
 #if 0
-    init_hw();
     start_init();
 
     if (!check1())
