@@ -2,6 +2,7 @@
 #include "ports.h"
 //#include <printf.h>
 
+//#if 00000000000000000
 #define SWITCH_1 		PortA, Pin3
 #define SWITCH_2 		PortA, Pin4
 #define SHOT_IN 		PortA, Pin5
@@ -21,7 +22,15 @@
 
 
 
-void lcd_print(const char* msg, int row) {}
+void lcd_print(const char* msg, int row)
+{
+    while(*msg)
+    {
+    MT_WriteData(*msg);
+    MT_Delay(1000);
+    msg++;
+    }
+}
 //void lcd_print(const char* msg) {
 //    lcd_print(msg, 0);
 //}
@@ -156,10 +165,11 @@ void test_buttons();
 
 int main()
 {
-	test_lcd();
+	int_lcd_mt();
+	lcd_print("test", 0);
 	test_buttons();
 
-#if 0
+//#if 0
     init_hw();
     start_init();
 
@@ -230,3 +240,5 @@ int main()
 
     return 0;
 }
+
+//#endif

@@ -10,7 +10,9 @@
 
 #include <stm32f4xx_gpio.h>
 #include <stm32f4xx_rcc.h>
+#include "defines.h"
 
+//#if 00000
 //#include <stm32f4xx.h>
 //#include <stm32f4xx_gpio.h>
 //#include <stm32f4xx_rcc.h>
@@ -21,6 +23,23 @@
 #define button GPIOA, GPIO_Pin_0
 int a, b, c, d ;
 GPIO_InitTypeDef GPIO_InitStruct;
+
+#include "ports.h"
+
+void set_port(PortType port, int id)
+{
+	GPIO_SetBits(port, id); // sw2
+}
+void reset_port(PortType port, int id)
+{
+	GPIO_ResetBits(port, id); // sw2
+	}
+int get_port(PortType port, int id)
+{
+	uint8_t c = GPIO_ReadInputDataBit(port, id);
+	return c;
+	}
+
 
 static void GPIO_setup(void)
 {
@@ -120,7 +139,7 @@ static void initTimer()
 	NVIC_EnableIRQ(TIM6_DAC_IRQn); //Разрешение TIM6_DAC_IRQn прерывания
 }
 
-void test_lcd2()
+void init_lcd_mt()
 {
 	MT_Init();
 	    MT_Delay(1000);
@@ -140,8 +159,16 @@ void test_lcd2()
 	    MT_DisplayClear();
 	    MT_Delay(10000);
 
-	    MT_WriteData(0x32);
+		//lcd_print("hell", 0);
+
+	    /*
+	    char* str = "test";
+	    while(*str)
+	    {
+	    MT_WriteData(*str);
 	    MT_Delay(1000);
+	    str++;
+	    }
 	    MT_WriteData(0x20);
 	    MT_Delay(1000);
 	    MT_WriteData(0x62);
@@ -160,10 +187,9 @@ void test_lcd2()
 	    MT_Delay(1000);
 	    MT_WriteData(0x65);
 	    MT_Delay(1000);
-
+*/
 }
 
-#include "defines.h"
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_hd44780.h"
 
@@ -261,18 +287,6 @@ void test_adc()
 }
 
 int test_usb(void);
-#include "ports.h"
-void set_port(PortType port, int id)
-{
-}
-void reset_port(PortType port, int id)
-{
-	//GPIO_ResetBits(GPIOD, GPIO_Pin_12 | GPIO_Pin_13 |GPIO_Pin_14 |GPIO_Pin_15 );
-}
-int get_port(PortType port, int id)
-{
-	return 0;
-}
 
 int main3(void)
 {
@@ -301,3 +315,4 @@ int main3(void)
 	return 0;
 }
 
+//#endif
