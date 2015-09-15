@@ -15,11 +15,7 @@
 
 #include <stm32f4xx_gpio.h>
 #include <stm32f4xx_rcc.h>
-
-//#include <stm32f4xx.h>
-//#include <stm32f4xx_gpio.h>
-//#include <stm32f4xx_rcc.h>
-
+#include "defines.h"
 
 #define LED1 GPIOD, GPIO_Pin_12
 #define LED2 GPIOD, GPIO_Pin_13
@@ -31,73 +27,116 @@ GPIO_InitTypeDef GPIO_InitStruct;
 
 //#define DISCOVERY
 
+#include "ports.h"
+
+void set_port(PortType port, int id)
+{
+    GPIO_SetBits(port, id); // sw2
+}
+void reset_port(PortType port, int id)
+{
+    GPIO_ResetBits(port, id); // sw2
+}
+int get_port(PortType port, int id)
+{
+    uint8_t c = GPIO_ReadInputDataBit(port, id);
+    return c;
+}
+
 static void button_setup(void)
 {
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0;		  // we want to configure PA0
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;//this sets the GPIO modules clock speed
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;   // this enables the pulldown resistor --> we want to detect a high level
-	GPIO_Init(GPIOA, &GPIO_InitStruct);
+#ifdef DISCOVERY
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0;		  // we want to configure PA0
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;//this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;   // this enables the pulldown resistor --> we want to detect a high level
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
+#else
+
+    // left, right, del, right buttons
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+    GPIO_InitStruct.GPIO_Pin = /*GPIO_Pin_9 | GPIO_Pin_10 |*/ GPIO_Pin_13 | GPIO_Pin_14;		  // we want to configure PA0
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
+    GPIO_InitStruct.GPIO_Speed = speed;//this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    // shot in (PA5)
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5;		  // we want to configure PA0
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
+    GPIO_InitStruct.GPIO_Speed = speed;//this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;   // this enables the pulldown resistor --> we want to detect a high level
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+#endif
 }
 
 static void GPIO_setup(void)
 {
+    GPIOSpeed_TypeDef speed = GPIO_Speed_25MHz;
+
 #ifdef DISCOVERY
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15 | GPIO_Pin_14 | GPIO_Pin_13 | GPIO_Pin_12; // we want to configure all LED GPIO pins
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT; 		// we want the pins to be an output
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz; 	// this sets the GPIO modules clock speed
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 	// this sets the pin type to push / pull (as opposed to open drain)
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL; 	// this sets the pullup / pulldown resistors to be inactive
-	GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-	button_setup();
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15 | GPIO_Pin_14 | GPIO_Pin_13 | GPIO_Pin_12; // we want to configure all LED GPIO pins
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT; 		// we want the pins to be an output
+    GPIO_InitStruct.GPIO_Speed = speed; 	// this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 	// this sets the pin type to push / pull (as opposed to open drain)
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL; 	// this sets the pullup / pulldown resistors to be inactive
+    GPIO_Init(GPIOD, &GPIO_InitStruct);
 #else
+    // switch 2, switch 1 for test
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4;
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT; 		// we want the pins to be an output
+    GPIO_InitStruct.GPIO_Speed = speed; 	// this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 	// this sets the pin type to push / pull (as opposed to open drain)
+    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL; 	// this sets the pullup / pulldown resistors to be inactive
+    GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	GPIOSpeed_TypeDef speed = GPIO_Speed_25MHz;
-	/// INPUTS
-
-	// left, right, del, right buttons
+	// shotout (PC5)
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-	GPIO_InitStruct.GPIO_Pin = /*GPIO_Pin_9 | GPIO_Pin_10 |*/ GPIO_Pin_13 | GPIO_Pin_14 ;		  // we want to configure PA0
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
-	GPIO_InitStruct.GPIO_Speed = speed;//this sets the GPIO modules clock speed
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-	// shot in,
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5 ;		  // we want to configure PA0
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
-	GPIO_InitStruct.GPIO_Speed = speed;//this sets the GPIO modules clock speed
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	// OUTPUTS
-
-	// shot out
-	//RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5; // we want to configure all LED GPIO pins
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT; 		// we want the pins to be an output
-	GPIO_InitStruct.GPIO_Speed = speed; 	// this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_Speed = speed; 	// this sets the GPIO modules clock speed
 	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 	// this sets the pin type to push / pull (as opposed to open drain)
 	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL; 	// this sets the pullup / pulldown resistors to be inactive
 	GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-
-	// switch 2, switch 1 for test
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4;
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT; 		// we want the pins to be an output
-	GPIO_InitStruct.GPIO_Speed = speed; 	// this sets the GPIO modules clock speed
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP; 	// this sets the pin type to push / pull (as opposed to open drain)
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL; 	// this sets the pullup / pulldown resistors to be inactive
-	GPIO_Init(GPIOA, &GPIO_InitStruct);
 #endif
+
+    button_setup();
 }
+
+
+void test_buttons()
+{
+	GPIO_setup();
+
+	GPIO_ResetBits(GPIOA, GPIO_Pin_4); // sw2
+	GPIO_ResetBits(GPIOC, GPIO_Pin_5); // shotout
+
+	while(1) {
+		uint8_t c = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3);
+		if(c)
+		{
+			GPIO_SetBits(GPIOA, GPIO_Pin_4); // sw2
+			lcd_print("test", 0);
+		}
+		else
+			GPIO_ResetBits(GPIOA, GPIO_Pin_4); // sw2
+
+		uint8_t c2 = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_5);
+		if(c2)
+			GPIO_SetBits(GPIOC, GPIO_Pin_5); // shotout
+		else
+			GPIO_ResetBits(GPIOC, GPIO_Pin_5); // shotout
+
+	}
+}
+
 
 // Обработчик прерывания TIM6_DAC
 void TIM6_DAC_IRQHandler(void)
@@ -129,6 +168,29 @@ static void initTimer()
 	NVIC_EnableIRQ(TIM6_DAC_IRQn); //Разрешение TIM6_DAC_IRQn прерывания
 }
 
+void init_lcd_mt()
+{
+	MT_Init();
+	    MT_Delay(1000);
+
+	    MT_FunctionSet8bit();
+	    MT_Delay(1000);
+
+	    MT_FunctionSet4bit(1, 1);
+	    MT_Delay(1000);
+
+	    MT_FunctionSet4bit(1, 1);
+	    MT_Delay(1000);
+
+	    MT_DisplayOnOff();
+	    MT_Delay(1000);
+
+	    MT_DisplayClear();
+	    MT_Delay(10000);
+}
+
+#include "tm_stm32f4_delay.h"
+#include "tm_stm32f4_hd44780.h"
 
 int test_lcd(void) {
 	/* Rectangle for custom character */
@@ -228,21 +290,6 @@ void test_adc()
 
 int test_usb(void);
 
-
-#include "ports.h"
-void set_port(PortType port, int id)
-{
-	GPIO_SetBits(port, id);
-}
-
-void reset_port(PortType port, int id)
-{
-	GPIO_ResetBits(port, id);
-}
-int get_port(PortType port, int id)
-{
-	return GPIO_ReadInputDataBit(port, id);
-}
 
 void delay(int ms)
 {
@@ -349,3 +396,4 @@ int main3(void)
 	return 0;
 }
 
+//#endif

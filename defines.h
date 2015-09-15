@@ -71,6 +71,29 @@
 #define TM_HD44780_D7_PORT				GPIOB
 #define TM_HD44780_D7_PIN				GPIO_Pin_15
 
+
+
+#define MT_WH1602_RS_PORT               (GPIOC)
+#define MT_WH1602_RS_PIN		(GPIO_Pin_2)
+
+#define MT_WH1602_RW_PORT		(GPIOB)
+#define MT_WH1602_RW_PIN		(GPIO_Pin_10)
+
+#define MT_WH1602_E_PORT		(GPIOB)
+#define MT_WH1602_E_PIN	  		(GPIO_Pin_14)
+
+#define MT_WH1602_DB7_PORT		(GPIOD)
+#define MT_WH1602_DB7_PIN		(GPIO_Pin_2)
+
+#define MT_WH1602_DB6_PORT		(GPIOC)
+#define MT_WH1602_DB6_PIN        	(GPIO_Pin_12)
+
+#define MT_WH1602_DB5_PORT		(GPIOA)
+#define MT_WH1602_DB5_PIN	        (GPIO_Pin_8)
+
+#define MT_WH1602_DB4_PORT		(GPIOA)
+#define MT_WH1602_DB4_PIN		(GPIO_Pin_10)
+
 // ===================== end of LCD =======================
 
 
