@@ -23,9 +23,10 @@
 #define LED4 GPIOD, GPIO_Pin_15
 #define button GPIOA, GPIO_Pin_0
 int a, b, c, d ;
-GPIO_InitTypeDef GPIO_InitStruct;
 
-//#define DISCOVERY
+GPIO_InitTypeDef GPIO_InitStruct;
+GPIOSpeed_TypeDef speed = GPIO_Speed_25MHz;
+
 
 #include "ports.h"
 
@@ -49,7 +50,7 @@ static void button_setup(void)
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
     GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0;		  // we want to configure PA0
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN; 	  // we want it to be an input
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;//this sets the GPIO modules clock speed
+    GPIO_InitStruct.GPIO_Speed = speed;//this sets the GPIO modules clock speed
     GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;   // this sets the pin type to push / pull (as opposed to open drain)
     GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;   // this enables the pulldown resistor --> we want to detect a high level
     GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -76,9 +77,8 @@ static void button_setup(void)
 #endif
 }
 
-static void GPIO_setup(void)
+void GPIO_setup(void)
 {
-    GPIOSpeed_TypeDef speed = GPIO_Speed_25MHz;
 
 #ifdef DISCOVERY
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
@@ -189,61 +189,6 @@ void init_lcd_mt()
 	    MT_Delay(10000);
 }
 
-#include "tm_stm32f4_delay.h"
-#include "tm_stm32f4_hd44780.h"
-
-int test_lcd(void) {
-	/* Rectangle for custom character */
-	/* xxx means doesn't care, lower 5 bits are important for LCD */
-	uint8_t customChar[] = {
-		0x1F,	/*  xxx 11111 */
-		0x11,	/*  xxx 10001 */
-		0x11,	/*  xxx 10001 */
-		0x11,	/*  xxx 10001 */
-		0x11,	/*  xxx 10001 */
-		0x11,	/*  xxx 10001 */
-		0x11,	/*  xxx 10001 */
-		0x1F	/*  xxx 11111 */
-	};
-
-	/* Initialize system */
-	//SystemInit();
-
-	/* Initialize LCD 20 cols x 4 rows */
-	TM_HD44780_Init(20, 2);
-
-	/* Save custom character on location 0 in LCD */
-	//TM_HD44780_CreateChar(0, &customChar[0]);
-
-	/* Put string to LCD */
-	TM_HD44780_Puts(0, 0, "STM32F4/29 Discovery");
-	//TM_HD44780_Puts(2, 1, "20x4 HD44780 LCD");
-	//TM_HD44780_Puts(0, 2, "stm32f4-\n\r       discovery.com");
-
-	/* Wait a little */
-	Delayms(500);
-
-	/* Clear LCD */
-	//TM_HD44780_Clear();
-
-	/* Show cursor */
-	//TM_HD44780_CursorOn();
-
-	/* Write new text */
-	//TM_HD44780_Puts(6, 1, "CLEARED!");
-
-	/* Wait a little */
-	//Delayms(1000);
-
-	/* Enable cursor blinking */
-	//TM_HD44780_BlinkOn();
-
-	/* Show custom character at x = 1, y = 2 from RAM location 0 */
-	//TM_HD44780_PutCustom(1, 2, 0);
-
-	return 0;
-}
-
 #if 00000000
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_adc.h"
@@ -294,20 +239,23 @@ int test_usb(void);
 void delay(int ms)
 {
 	Delayms(ms);
+	//MT_Delay(ms);
 	}
 
 int main3(void)
 {
-	test_lcd();
-	return 0;
+	//test_lcd();
+	//return 0;
 	//test_adc();
 
 	/* Initialize system */
-	SystemInit();
+	//SystemInit();
 
+	//TM_RCC_InitSystem();
+	//HAL_Init();
 	TM_DELAY_Init();
 
-	GPIO_setup();
+	//GPIO_setup();
 
 	int i = 0;
 
@@ -321,6 +269,11 @@ int main3(void)
 	//Если кнопка нажата, то…
 	    if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)==1)
 	    {
+	    	char sz[32];
+	    	sprintf(sz, "%d", i);
+	    	lcd_print(sz, 0);
+	    	//delay(1000);
+
 	    	int tm = 500;
 	        GPIO_SetBits(GPIOD, GPIO_Pin_12); //Подаем «1» на PD12
 	        delay(tm); //Функция задержки
@@ -333,7 +286,8 @@ int main3(void)
 	        GPIO_ResetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14/*|GPIO_Pin_15*/); //Сбрасываем все пины в «0»
 	        delay(tm);
 	    }
-        delay(1000); // ~3sec
+        //delay(1000); // ~3sec
+        delay(100); // ~.3sec
 
         if(i % 2 == 0)
         	GPIO_SetBits(GPIOD, GPIO_Pin_15); //Подаем «1» на PD15
@@ -375,12 +329,19 @@ int main3(void)
 	while(1)
 	{
 	    if (get_port(GPIOC,GPIO_Pin_13)==1) // left
+	    {
+	    	lcd_print("left", 0);
 	    	set_port(GPIOA,GPIO_Pin_3); // sw1
+	    }
 	    else
 	    	reset_port(GPIOA,GPIO_Pin_3);
 
 	    if (get_port(GPIOC,GPIO_Pin_14)==1) // right
+	    {
 	    	set_port(GPIOA, GPIO_Pin_4); // switch 2
+	    	lcd_print("right", 0);
+
+	    }
 	    else
 	    	reset_port(GPIOA, GPIO_Pin_4);
 

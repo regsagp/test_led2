@@ -24,6 +24,9 @@
 
 void lcd_print(const char* msg, int row)
 {
+	MT_DisplayClear();
+	MT_Delay(10000);
+
     while(*msg)
     {
     MT_WriteData(*msg);
@@ -165,15 +168,14 @@ void init_hw()
 {
 	SystemInit();
 	init_lcd_mt();
+	GPIO_setup();
 }
-
-void test_buttons();
 
 int main()
 {
     init_hw();
 	lcd_print("test", 0);
-	test_buttons();
+	main3();
 
 #if 0
     start_init();

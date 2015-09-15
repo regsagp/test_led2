@@ -16,46 +16,48 @@ void MT_Init()
 
     // Initialize all pins connected to the WH1602 module
 
+    GPIOSpeed_TypeDef speed = GPIO_Speed_50MHz;
+
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_RS_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_RS_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_RW_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_RW_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_E_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_E_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_DB7_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_DB7_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_DB6_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_DB6_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_DB5_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_DB5_PORT, &MT_GPIOcfg);
 
     GPIO_StructInit(&MT_GPIOcfg);
     MT_GPIOcfg.GPIO_Pin = MT_WH1602_DB4_PIN;
     MT_GPIOcfg.GPIO_Mode = GPIO_Mode_OUT;
-    MT_GPIOcfg.GPIO_Speed = GPIO_Speed_50MHz;
+    MT_GPIOcfg.GPIO_Speed = speed;
     GPIO_Init(MT_WH1602_DB4_PORT, &MT_GPIOcfg);
 }
 //**************************************************************************************************
